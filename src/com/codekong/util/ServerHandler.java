@@ -9,6 +9,11 @@ import org.apache.mina.core.session.IoSession;
  * 负责session对象的创建监听及消息发送和接收的监听
  */
 public class ServerHandler extends IoHandlerAdapter{
+
+    public ServerHandler(){
+        super();
+        System.err.println("handler");
+    }
     @Override
     public void sessionCreated(IoSession session) throws Exception {
         // TODO Auto-generated method stub

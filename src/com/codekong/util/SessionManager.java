@@ -33,6 +33,7 @@ public class SessionManager {
      */
     public void setSession(IoSession session){
         this.mSession = session;
+        System.err.println("set session" + mSession.getId());
     }
 
     public IoSession getSession(){
@@ -63,6 +64,7 @@ public class SessionManager {
     public void writeToServer(String msg){
         if (mSession != null){
             mSession.write(msg);
+            System.err.println("writing" + mSession.getId());
         }
     }
 

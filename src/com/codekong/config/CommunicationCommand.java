@@ -25,8 +25,5 @@ public class CommunicationCommand {
     //成功
     public static final String STATUS_CODE_SUCC = "100";
     //失败
-    public static final String STATUS_CODE_FAIL = "110";
-
-
-
+    public static final String STATUS_CODE_FAIL = "-404";
 }

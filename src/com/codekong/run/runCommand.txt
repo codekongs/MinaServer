@@ -1,0 +1,21 @@
+B : telnet 127.0.0.1 9999
+
+active_login:admin0 admin0   <---- status_code:100
+
+A : telnet 127.0.0.1 9999
+
+passive_login: admin1 admin1 <---- status_code:100
+
+A : hole_punching:5431 17
+
+A : <---- assist_port:65523 8023
+
+B : <---- assist_port:65523 8023 17
+
+A : random_id:8023
+
+B : random_id:8023
+
+A : <---- otcl_addr:123.123.123.123 1234
+
+B : <---- otcl_addr:124.124.124.124 4321

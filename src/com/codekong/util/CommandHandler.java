@@ -78,7 +78,7 @@ public class CommandHandler {
         String[] res = data.split(" ");
         //盘ID和协议类型
         //盘ID为5431  协议为TCP
-        if (res[0].equals("5431") && res[1].equals("6")){
+        if (res[0].equals("5431") && res[1].equals("17")){
             assignAssistPort();
         }
     }
@@ -88,19 +88,22 @@ public class CommandHandler {
      */
     private static void assignAssistPort() {
         int randomPort = (int) Math.round(Math.random() * (65535 - 1024) + 1025);
-        System.out.println("port" + randomPort);
+        int randomId = (int) (Math.random() * (10000 - 1000) + 1000);
+        System.out.println("port " + randomPort + "randomId " + randomId);
         ConnectionConfig connectionConfig = new ConnectionConfig.Builder()
                 .setPort(randomPort)
                 .setReadBufferSize(20480)
                 .setIdleTime(10)
-                .setIoHandlerAdapter(new ClientHoleHandler())
+                .setIoHandlerAdapter(new ClientHoleHandler(randomId))
                 .builder();
         MinaService minaService = new MinaService();
         minaService.startServer(connectionConfig);
 
-        //向服务器返回端口分配信息
-        String portInfo = "assist:" + randomPort + ":" +(Math.random() * 10000);
+        //向两个客户端返回端口分配信息
+        String portInfo = "assist:" + randomPort + ":" +(Math.random() * 10000) + "random_id" + randomId;
         SessionManager.getInstance().writeToServer(portInfo);
-        SessionList.getIoSession(1).write(portInfo);
+
+        //给存储器的应该带上协议类型
+        SessionList.getIoSession(1).write(portInfo + " "+ "17");
     }
 }
